@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class ConversorMonedas {
 	
-	public void ConvertirMoneda(double MontoInicial, Scanner in) {
+	public static void ConvertirMoneda(double MontoInicial, Scanner in) {
 		
 		Monedas monedas = new Monedas();
 		double factorAConvertir = 1;
@@ -15,31 +15,41 @@ public class ConversorMonedas {
 				System.out.println("Conversion Cancelada");
 				return;
 			case 1:
-				factorAConvertir = monedas.solAdolar;
+				factorAConvertir = monedas.dolarASol;
 				monedaNombre = "Dolar/es";
+				break;
 			case 2:
-				factorAConvertir = monedas.solAEuro;
+				factorAConvertir = monedas.euroASol;
 				monedaNombre = "Euro/s";
+				break;
 			case 3:
-				factorAConvertir = monedas.solALibrasE;
-				monedaNombre = "Libra/s";
+				factorAConvertir = monedas.librasEASol;
+				monedaNombre = "Libra/s Esterlina/s";
+				break;
 			case 4:
-				factorAConvertir = monedas.solAYen;
+				factorAConvertir = monedas.yenASol;
 				monedaNombre = "Yen/es";
+				break;
 			case 5:
-				factorAConvertir = monedas.solAWon;
+				factorAConvertir = monedas.wonASol;
 				monedaNombre = "Won/s";
+				break;
 			//-----
 			case 6:
-				factorAConvertir = monedas.dolarASol;
+				factorAConvertir = monedas.solADolar;
+				break;
 			case 7:
-				factorAConvertir = monedas.euroASol;
+				factorAConvertir = monedas.solAEuro;
+				break;
 			case 8:
-				factorAConvertir = monedas.librasEASol;
+				factorAConvertir = monedas.solALibrasE;
+				break;
 			case 9:
-				factorAConvertir = monedas.yenASol;
+				factorAConvertir = monedas.solAYen;
+				break;
 			case 10:
-				factorAConvertir = monedas.wonASol;
+				factorAConvertir = monedas.solAWon;
+				break;
 		}
 		
 		double montoTransformado = Convertir(MontoInicial, factorAConvertir);
@@ -48,11 +58,11 @@ public class ConversorMonedas {
 		System.out.println("==================================================");
 	}
 	
-	private double Convertir(double MontoInicial, double multiplicador) {
-		return MontoInicial * multiplicador;
+	private static double Convertir(double MontoInicial, double multiplicador) {
+		return Math.round((MontoInicial * multiplicador) * 100.0) / 100.0;
 	}
 	
-	private int menu(Scanner in) {
+	private static int menu(Scanner in) {
 		System.out.println("\n\n=== Convirtiendo MONEDAS ====");
 		System.out.println("=========== SOL A OTRA MONEDA ===========");
 		System.out.println("1.- Convertir SOLES a DOLARES");
