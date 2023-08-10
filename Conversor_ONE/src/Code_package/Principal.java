@@ -4,6 +4,8 @@ package Code_package;
 import java.util.Scanner;
 import javax.swing.ImageIcon;
 
+import ConversorMoneda.ConversorMonedas;
+
 public class Principal{
 	public static void main(String[] args) {
 		
@@ -63,7 +65,7 @@ public class Principal{
 			System.out.println("1 -> Conversor de Moneda");
 			System.out.println("2 -> Conversor de Temperatura");
 			System.out.println("3 -> Exit");
-			System.out.print("Elija una opcion -> ");
+			System.out.print("\nElija una opcion -> ");
 			
 			opcion = in.nextInt();
 			if(opcion == 1) {
@@ -82,7 +84,7 @@ public class Principal{
 	private static void llamarConversorMonedas(Scanner in) {
 		System.out.print("\n\nIngrese el monto a transformar: ");
 		double monedas = in.nextDouble();
-		
+		ConversorMonedas.ConvertirMoneda(monedas, in);
 	}
 	private static void llamarConversorTemperaturas(Scanner in) {
 		System.out.print("\n\nIngrese la temperatura a transformar: ");
