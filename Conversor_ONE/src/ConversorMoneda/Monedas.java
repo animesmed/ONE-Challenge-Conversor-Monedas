@@ -8,11 +8,11 @@ public class Monedas {
   	- Convertir de la moneda de tu país  a Yen Japonés
   	- Convertir de la moneda de tu país  a Won sul-coreano
     */
-	protected double dolarASol = 3.70;
-	protected double euroASol = 4.06;
-	protected double librasEASol = 4.69;
-	protected double yenASol = 0.026;
-	protected double wonASol = 0.0028;
+	protected double solADolar = 3.70;
+	protected double solAEuro = 4.06;
+	protected double solALibrasE = 4.69;
+	protected double solAYen = 0.026;
+	protected double solAWon = 0.0028;
 	
 	//=======
 		/*
@@ -23,10 +23,10 @@ public class Monedas {
 	    - Convertir de Won sul-coreano a la moneda de tu país
 		*/
 	
-	protected double solAdolar = Math.round((1/dolarASol) * 100.0) / 100.0;
-	protected double solAEuro = Math.round((1/euroASol) * 100.0) / 100.0;
-	protected double solALibrasE = Math.round((1/librasEASol) * 100.0) / 100.0;
-	protected double solAYen = Math.round((1/yenASol) * 100.0) / 100.0;
-	protected double solAWon = Math.round((1/wonASol) * 100.0) / 100.0;
+	protected double dolarASol = Math.round((1/solADolar) * 100.0) / 100.0;
+	protected double euroASol = Math.round((1/solAEuro) * 100.0) / 100.0;
+	protected double librasEASol = Math.round((1/solALibrasE) * 100.0) / 100.0;
+	protected double yenASol = Math.round((1/solAYen) * 100.0) / 100.0;
+	protected double wonASol = Math.round((1/solAWon) * 100.0) / 100.0;
 	
 }
