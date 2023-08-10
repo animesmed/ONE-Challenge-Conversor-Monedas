@@ -1,15 +1,18 @@
 package ConversorMoneda;
 
+import java.util.Scanner;
+
 public class ConversorMonedas {
 	
-	public void ConvertirMoneda(double MontoInicial) {
-		int op = -1;
+	public void ConvertirMoneda(double MontoInicial, Scanner in) {
+		
 		Monedas monedas = new Monedas();
 		double factorAConvertir = 1;
 		String monedaNombre = "Soles";
-		menu();
-		switch (op) {
+		
+		switch (menu(in)) {
 			case 0:
+				System.out.println("Conversion Cancelada");
 				return;
 			case 1:
 				factorAConvertir = monedas.solAdolar;
@@ -49,7 +52,7 @@ public class ConversorMonedas {
 		return MontoInicial * multiplicador;
 	}
 	
-	private void menu() {
+	private int menu(Scanner in) {
 		System.out.println("\n\n=== Convirtiendo MONEDAS ====");
 		System.out.println("=========== SOL A OTRA MONEDA ===========");
 		System.out.println("1.- Convertir SOLES a DOLARES");
@@ -64,5 +67,7 @@ public class ConversorMonedas {
 		System.out.println("9.- Convertir YEN JAPONES a SOLES");
 		System.out.println("10.- Convertir WON SURCOREANO a SOLES");
 		System.out.println("\n0.- EXIT");
+		System.out.print("\nIngrese una opcion -> ");
+		return in.nextInt();
 	}
 }
