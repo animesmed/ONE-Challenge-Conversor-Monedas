@@ -10,7 +10,7 @@ public class ConversorMonedas {
 		
 		switch (menu(in)) {
 			case 0:
-				System.out.println("\n== Conversion Cancelada ==");
+				System.out.println("\n== Conversion Cancelada ==\n");
 				return;
 			case 1:
 				factorAConvertir = Monedas.dolarASol;
