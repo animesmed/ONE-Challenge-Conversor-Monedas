@@ -5,50 +5,48 @@ import java.util.Scanner;
 public class ConversorMonedas {
 	
 	public static void ConvertirMoneda(double MontoInicial, Scanner in) {
-		
-		Monedas monedas = new Monedas();
 		double factorAConvertir = 1;
 		String monedaNombre = "Soles";
 		
 		switch (menu(in)) {
 			case 0:
-				System.out.println("Conversion Cancelada");
+				System.out.println("\n== Conversion Cancelada ==");
 				return;
 			case 1:
-				factorAConvertir = monedas.dolarASol;
+				factorAConvertir = Monedas.dolarASol;
 				monedaNombre = "Dolar/es";
 				break;
 			case 2:
-				factorAConvertir = monedas.euroASol;
+				factorAConvertir = Monedas.euroASol;
 				monedaNombre = "Euro/s";
 				break;
 			case 3:
-				factorAConvertir = monedas.librasEASol;
+				factorAConvertir = Monedas.librasEASol;
 				monedaNombre = "Libra/s Esterlina/s";
 				break;
 			case 4:
-				factorAConvertir = monedas.yenASol;
+				factorAConvertir = Monedas.yenASol;
 				monedaNombre = "Yen/es";
 				break;
 			case 5:
-				factorAConvertir = monedas.wonASol;
+				factorAConvertir = Monedas.wonASol;
 				monedaNombre = "Won/s";
 				break;
 			//-----
 			case 6:
-				factorAConvertir = monedas.solADolar;
+				factorAConvertir = Monedas.solADolar;
 				break;
 			case 7:
-				factorAConvertir = monedas.solAEuro;
+				factorAConvertir = Monedas.solAEuro;
 				break;
 			case 8:
-				factorAConvertir = monedas.solALibrasE;
+				factorAConvertir = Monedas.solALibrasE;
 				break;
 			case 9:
-				factorAConvertir = monedas.solAYen;
+				factorAConvertir = Monedas.solAYen;
 				break;
 			case 10:
-				factorAConvertir = monedas.solAWon;
+				factorAConvertir = Monedas.solAWon;
 				break;
 		}
 		
