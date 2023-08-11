@@ -5,6 +5,7 @@ import java.util.Scanner;
 import javax.swing.ImageIcon;
 
 import ConversorMoneda.ConversorMonedas;
+import ConversorTemperatura.ConversorTemperaturas;
 
 public class Principal{
 	public static void main(String[] args) {
@@ -89,6 +90,7 @@ public class Principal{
 	private static void llamarConversorTemperaturas(Scanner in) {
 		System.out.print("\n\nIngrese la temperatura a transformar: ");
 		double temperatura = in.nextDouble();
+		ConversorTemperaturas.ConvertirTemperatura(temperatura, in);
 	}
 	
 	/** Returns an ImageIcon, or null if the path was invalid. */
