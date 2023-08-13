@@ -1,41 +1,20 @@
 package Code_package;
 
 //Java program to demonstrate working of Scanner in Java
-import java.util.Scanner;
-import javax.swing.ImageIcon;
-
 import ConversorMoneda.ConversorMonedas;
 import ConversorTemperatura.ConversorTemperaturas;
 
+import javax.swing.JOptionPane;
+
+/**
+ * Este programa puede convertir monedas y temperaturas con una interfaz
+ * usando JOptionPane
+ * @author Annie
+ * @version 1.0
+ *
+ */
 public class Principal{
 	public static void main(String[] args) {
-		
-		/*
-		//default message
-		JOptionPane.showMessageDialog(getRootFrame(), "omg this is working.");
-		//custom title, warning icon
-		JOptionPane.showMessageDialog(getRootFrame(),
-		    "And this still working xd",
-		    "Warning",
-		    JOptionPane.WARNING_MESSAGE);
-		//custom title, error icon
-		JOptionPane.showMessageDialog(getRootFrame(),
-		    "Mensaje de error asi bien erroroso",
-		    "Error",
-		    JOptionPane.ERROR_MESSAGE);
-		//custom title, no icon
-		JOptionPane.showMessageDialog(getRootFrame(),
-		    "Mensaje asi bien claro sin icono",
-		    "A message without an icon",
-		    JOptionPane.PLAIN_MESSAGE);
-		//custom title, custom icon
-		/*ImageIcon icon = createImageIcon("images/middle.gif",
-                "a pretty but meaningless splat");
-		JOptionPane.showMessageDialog(getRootFrame(),
-		    "Ni idea que decir aca, no se como sacar el icono custom :c.",
-		    "Dialogo Random",
-		    JOptionPane.INFORMATION_MESSAGE);*/
-		
 		//===================================================================0
 		/*
 		- Convertir de la moneda de tu país a Dólar
@@ -55,40 +34,35 @@ public class Principal{
         tipos de conversiones como temperatura por ejemplo?
 		*/
 		
-		// Using Scanner for Getting Input from User
-		Scanner in = new Scanner(System.in);
-		
 		//Menu
-		int opcion = 1;
+		Object valorEscogido = null;
 		do {
-			System.out.println(".::MENU::.");
-			System.out.println("Seleccione una opcion de conversion");
-			System.out.println("1 -> Conversor de Moneda");
-			System.out.println("2 -> Conversor de Temperatura");
-			System.out.println("3 -> Exit");
-			System.out.print("\nElija una opcion (No hay error)-> ");
-			opcion = in.nextInt();
-			if(opcion == 1) {
-				llamarConversorMonedas(in);
-			}else if(opcion == 2) {
-				llamarConversorTemperaturas(in);
+			//--JOptionPane
+			Object[] opcionesMenu = {"Conversor de Moneda", "Conversor de Temperatura"};
+			valorEscogido = JOptionPane.showInputDialog(null, 
+					"Seleccione el tipo de Conversion a realizar", "Menu", JOptionPane.INFORMATION_MESSAGE, 
+					null, opcionesMenu, opcionesMenu[0]);
+			if(valorEscogido == null) {
+				break;
 			}
-			//LLamar de nuevo o menu o cancelar programa
+			if(valorEscogido.toString().equals("Conversor de Moneda")) {
+				llamarConversorMonedas();
+			}else if(valorEscogido.toString().equals("Conversor de Temperatura")){
+				llamarConversorTemperaturas();
+			}
 			
-			
-		} while (opcion != 3);
+		} while (valorEscogido != null);
 		
-		System.out.println("\n=== Cerrando programa ===");
-		// closing scanner
-		in.close();
-		
+		JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+				"Cerrando Programa","Exit",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	private static boolean MetodoAdicional(Scanner in) {
-		System.out.println("\n======> Desea convertir de nuevo (No hay error)? Y / N\n");
-		String aux = in.next().toUpperCase();
-		//Transformacion de texto a boolean
-		if(aux.equals("Y")) {
+	private static boolean MetodoAdicional() {
+		int respuesta = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
+	             "Seguir convirtiendo", "¿Desea convertir de nuevo?", 
+	             JOptionPane.YES_NO_OPTION);
+		if(respuesta == JOptionPane.YES_OPTION) {
 			return true;
 		}else{
 			return false;
@@ -102,62 +76,67 @@ public class Principal{
 		return Double.parseDouble(num);
 	}
 	
-	private static void llamarConversorMonedas(Scanner in)  {
-		System.out.print("\n\nIngrese el monto a transformar(error): ");
+	private static void llamarConversorMonedas()  {
 		try {
-			String numero = in.next();
+			//String numero = in.next();
+			//JOptionPane
+			String numero = JOptionPane.showInputDialog(JOptionPane.getRootFrame(),
+					"Ingrese el monto a transformar:","Dato a convertir",
+					JOptionPane.QUESTION_MESSAGE);
+			if(numero==null) {
+				JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+						"Conversión cancelada","Alerta",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 			double monedas = parseNumero(numero);
-			ConversorMonedas.Convertir(monedas, in); //-
-			if(ConversorMonedas.cancelado) { //-
+			ConversorMonedas.Convertir(monedas);
+			if(ConversorMonedas.cancelado) {
 				return;
 			}else {
-				if(MetodoAdicional(in)) {
-					llamarConversorMonedas(in);
+				if(MetodoAdicional()) {
+					llamarConversorMonedas();
 				}else {
 					return;
 				}
 			}
 		}catch(NumberFormatException err) {
-			System.out.println("\nError: Debes Ingresar una cantidad numerica correcta\n");
-			in.nextLine(); // Limpiar el búfer del Scanner
-			llamarConversorMonedas(in);
+			JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+					"Debes Ingresar una cantidad numerica correcta","Alerta",
+					JOptionPane.ERROR_MESSAGE);
+			llamarConversorMonedas();
 		}
 	}
 	
-	private static void llamarConversorTemperaturas(Scanner in) {
-		System.out.print("\n\nIngrese la temperatura a transformar(error): ");
+	private static void llamarConversorTemperaturas() {
 		try {
-			String numero = in.next();
+			String numero = JOptionPane.showInputDialog("Ingrese los grados a transformar:");
+			if(numero==null) {
+				JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+						"Conversión cancelada","Alerta",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 			double temperatura = parseNumero(numero);
-			ConversorTemperaturas.Convertir(temperatura, in);
+			ConversorTemperaturas.Convertir(temperatura);
 			if(ConversorTemperaturas.cancelado) {
 				return;
 			}else {
-				if(MetodoAdicional(in)) {
-					llamarConversorTemperaturas(in);
+				if(MetodoAdicional()) {
+					llamarConversorTemperaturas();
 				}else {
 					return;
 				}
 			}
 		}catch(NumberFormatException err) {
-			System.out.println("\nError: Debes Ingresar una cantidad numerica correcta\n");
-			in.nextLine(); // Limpiar el búfer del Scanner
-			llamarConversorTemperaturas(in);
+			JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+					"Debes Ingresar una cantidad numerica correcta","Alerta",
+					JOptionPane.ERROR_MESSAGE);
+			llamarConversorTemperaturas();
 		}
 	}
-	
-	/** Returns an ImageIcon, or null if the path was invalid. */
-	protected ImageIcon createImageIcon(String path,
-	                                           String description) {
-	    java.net.URL imgURL = getClass().getResource(path);
-	    if (imgURL != null) {
-	        return new ImageIcon(imgURL, description);
-	    } else {
-	        System.err.println("Couldn't find file: " + path);
-	        return null;
-	    }
-	}
 
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 	
 }

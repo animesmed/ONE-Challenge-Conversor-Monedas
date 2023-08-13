@@ -1,83 +1,84 @@
 package ConversorMoneda;
-
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class ConversorMonedas {
 	public static boolean cancelado = false;
-	public static void Convertir(double MontoInicial, Scanner in) {
+	public static void Convertir(double MontoInicial) {
 		double factorAConvertir = 1;
 		cancelado = false;
 		String monedaNombre = "Soles";
-		
-		switch (menu(in)) {
-			case 0:
-				System.out.println("\n== Conversion Cancelada ==\n");
-				cancelado = true;
-				return;
-			case 1:
-				factorAConvertir = Monedas.dolarASol;
+		Object aux = menu();
+		if(aux == null) {
+			JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+					"Conversión cancelada","Alerta",
+					JOptionPane.ERROR_MESSAGE);
+			cancelado = true;
+			return;
+		}
+		switch (aux.toString()) {
+			case "Convertir SOLES a DOLARES":
+				factorAConvertir = Monedas.solADolar;
 				monedaNombre = "Dolar/es";
 				break;
-			case 2:
-				factorAConvertir = Monedas.euroASol;
+			case "Convertir SOLES a EUROS":
+				factorAConvertir = Monedas.solAEuro;
 				monedaNombre = "Euro/s";
 				break;
-			case 3:
-				factorAConvertir = Monedas.librasEASol;
+			case "Convertir SOLES a LIBRAS ESTERLINAS":
+				factorAConvertir = Monedas.solALibrasE;
 				monedaNombre = "Libra/s Esterlina/s";
 				break;
-			case 4:
-				factorAConvertir = Monedas.yenASol;
+			case "Convertir SOLES a YEN JAPONES":
+				factorAConvertir = Monedas.solAYen;
 				monedaNombre = "Yen/es";
 				break;
-			case 5:
-				factorAConvertir = Monedas.wonASol;
+			case "Convertir SOLES a WON SURCOREANO":
+				factorAConvertir = Monedas.solAWon;
 				monedaNombre = "Won/s";
 				break;
 			//-----
-			case 6:
-				factorAConvertir = Monedas.solADolar;
+			case "Convertir DOLARES a SOLES":
+				factorAConvertir = Monedas.dolarASol;
 				break;
-			case 7:
-				factorAConvertir = Monedas.solAEuro;
+			case "Convertir EUROS a SOLES":
+				factorAConvertir = Monedas.euroASol;
 				break;
-			case 8:
-				factorAConvertir = Monedas.solALibrasE;
+			case "Convertir LIBRAS ESTERLINAS a SOLES":
+				factorAConvertir = Monedas.librasEASol;
 				break;
-			case 9:
-				factorAConvertir = Monedas.solAYen;
+			case "Convertir YEN JAPONES a SOLES":
+				factorAConvertir = Monedas.yenASol;
 				break;
-			case 10:
-				factorAConvertir = Monedas.solAWon;
+			case "Convertir WON SURCOREANO a SOLES":
+				factorAConvertir = Monedas.wonASol;
 				break;
 		}
 		
 		double montoTransformado = Convertir(MontoInicial, factorAConvertir);
-		System.out.println("==================================================");
-		System.out.println("Tienes "+montoTransformado + " " + monedaNombre);
-		System.out.println("==================================================");
+		JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+				"Tienes "+montoTransformado + " " + monedaNombre,"Resultado",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	private static double Convertir(double MontoInicial, double multiplicador) {
 		return Math.round((MontoInicial * multiplicador) * 100.0) / 100.0;
 	}
 	
-	private static int menu(Scanner in) {
-		System.out.println("\n\n=== Convirtiendo MONEDAS ====");
-		System.out.println("=========== SOL A OTRA MONEDA ===========");
-		System.out.println("1.- Convertir SOLES a DOLARES");
-		System.out.println("2.- Convertir SOLES a EUROS");
-		System.out.println("3.- Convertir SOLES a LIBRAS ESTERLINAS");
-		System.out.println("4.- Convertir SOLES a YEN JAPONES");
-		System.out.println("5.- Convertir SOLES a WON SURCOREANO");
-		System.out.println("=========== OTRA MONEDA A SOLES ==========");
-		System.out.println("6.- Convertir DOLARES a SOLES");
-		System.out.println("7.- Convertir EUROS a SOLES");
-		System.out.println("8.- Convertir LIBRAS ESTERLINAS a SOLES");
-		System.out.println("9.- Convertir YEN JAPONES a SOLES");
-		System.out.println("10.- Convertir WON SURCOREANO a SOLES");
-		System.out.println("\n0.- EXIT");
-		System.out.print("\nIngrese una opcion (No hay error)-> ");
-		return in.nextInt();
+	private static Object menu() {
+		Object[] opcionesMenu = {"Convertir SOLES a DOLARES",
+				"Convertir SOLES a EUROS",
+				"Convertir SOLES a LIBRAS ESTERLINAS",
+				"Convertir SOLES a YEN JAPONES",
+				"Convertir SOLES a WON SURCOREANO",
+				"Convertir DOLARES a SOLES",
+				"Convertir EUROS a SOLES",
+				"Convertir LIBRAS ESTERLINAS a SOLES",
+				"Convertir YEN JAPONES a SOLES",
+				"Convertir WON SURCOREANO a SOLES"};
+		Object valorEscogido = JOptionPane.showInputDialog(null, 
+				"Elija la moneda a convertir su saldo", "Menu - Monedas", 
+				JOptionPane.QUESTION_MESSAGE,
+				null, opcionesMenu, opcionesMenu[0]);
+		return valorEscogido;
 	}
 }
