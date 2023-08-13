@@ -3,14 +3,16 @@ package ConversorMoneda;
 import java.util.Scanner;
 
 public class ConversorMonedas {
-	
-	public static void ConvertirMoneda(double MontoInicial, Scanner in) {
+	public static boolean cancelado = false;
+	public static void Convertir(double MontoInicial, Scanner in) {
 		double factorAConvertir = 1;
+		cancelado = false;
 		String monedaNombre = "Soles";
 		
 		switch (menu(in)) {
 			case 0:
 				System.out.println("\n== Conversion Cancelada ==\n");
+				cancelado = true;
 				return;
 			case 1:
 				factorAConvertir = Monedas.dolarASol;
@@ -75,7 +77,7 @@ public class ConversorMonedas {
 		System.out.println("9.- Convertir YEN JAPONES a SOLES");
 		System.out.println("10.- Convertir WON SURCOREANO a SOLES");
 		System.out.println("\n0.- EXIT");
-		System.out.print("\nIngrese una opcion -> ");
+		System.out.print("\nIngrese una opcion (No hay error)-> ");
 		return in.nextInt();
 	}
 }

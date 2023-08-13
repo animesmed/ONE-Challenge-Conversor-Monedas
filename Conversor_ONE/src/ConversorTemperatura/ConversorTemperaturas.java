@@ -2,15 +2,18 @@ package ConversorTemperatura;
 
 import java.util.Scanner;
 
-public class ConversorTemperaturas {
-public static void ConvertirTemperatura(double TemperaturaInicial, Scanner in) {
+public class ConversorTemperaturas{
+	public static boolean cancelado = false;
+	public static void Convertir(double TemperaturaInicial, Scanner in) {
 		double nuevaTemperatura = 0.0;
+		cancelado = false;
 		String[] textos = new String[2];
 		textos[0] = "";
 		textos[1] = "";
 		switch (menu(in)) {
 			case 0:
 				System.out.println("\n== Conversion Cancelada ==\n");
+				cancelado = true;
 				return;
 			//-----Celsius
 			case 1:

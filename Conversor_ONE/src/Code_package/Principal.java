@@ -59,38 +59,91 @@ public class Principal{
 		Scanner in = new Scanner(System.in);
 		
 		//Menu
-		int opcion;
+		int opcion = 1;
 		do {
 			System.out.println(".::MENU::.");
 			System.out.println("Seleccione una opcion de conversion");
 			System.out.println("1 -> Conversor de Moneda");
 			System.out.println("2 -> Conversor de Temperatura");
 			System.out.println("3 -> Exit");
-			System.out.print("\nElija una opcion -> ");
-			
+			System.out.print("\nElija una opcion (No hay error)-> ");
 			opcion = in.nextInt();
 			if(opcion == 1) {
 				llamarConversorMonedas(in);
 			}else if(opcion == 2) {
 				llamarConversorTemperaturas(in);
 			}
+			//LLamar de nuevo o menu o cancelar programa
+			
 			
 		} while (opcion != 3);
 		
 		System.out.println("\n=== Cerrando programa ===");
 		// closing scanner
 		in.close();
+		
 	}
 	
-	private static void llamarConversorMonedas(Scanner in) {
-		System.out.print("\n\nIngrese el monto a transformar: ");
-		double monedas = in.nextDouble();
-		ConversorMonedas.ConvertirMoneda(monedas, in);
+	private static boolean MetodoAdicional(Scanner in) {
+		System.out.println("\n======> Desea convertir de nuevo (No hay error)? Y / N\n");
+		String aux = in.next().toUpperCase();
+		//Transformacion de texto a boolean
+		if(aux.equals("Y")) {
+			return true;
+		}else{
+			return false;
+		}
 	}
+	
+	private static double parseNumero(String num) {
+		if(num.contains(",")) {
+			num = num.replace(",",".");
+		}
+		return Double.parseDouble(num);
+	}
+	
+	private static void llamarConversorMonedas(Scanner in)  {
+		System.out.print("\n\nIngrese el monto a transformar(error): ");
+		try {
+			String numero = in.next();
+			double monedas = parseNumero(numero);
+			ConversorMonedas.Convertir(monedas, in); //-
+			if(ConversorMonedas.cancelado) { //-
+				return;
+			}else {
+				if(MetodoAdicional(in)) {
+					llamarConversorMonedas(in);
+				}else {
+					return;
+				}
+			}
+		}catch(NumberFormatException err) {
+			System.out.println("\nError: Debes Ingresar una cantidad numerica correcta\n");
+			in.nextLine(); // Limpiar el búfer del Scanner
+			llamarConversorMonedas(in);
+		}
+	}
+	
 	private static void llamarConversorTemperaturas(Scanner in) {
-		System.out.print("\n\nIngrese la temperatura a transformar: ");
-		double temperatura = in.nextDouble();
-		ConversorTemperaturas.ConvertirTemperatura(temperatura, in);
+		System.out.print("\n\nIngrese la temperatura a transformar(error): ");
+		try {
+			String numero = in.next();
+			double temperatura = parseNumero(numero);
+			ConversorTemperaturas.Convertir(temperatura, in);
+			if(ConversorTemperaturas.cancelado) {
+				return;
+			}else {
+				if(MetodoAdicional(in)) {
+					llamarConversorTemperaturas(in);
+				}else {
+					return;
+				}
+			}
+		}catch(NumberFormatException err) {
+			System.out.println("\nError: Debes Ingresar una cantidad numerica correcta\n");
+			in.nextLine(); // Limpiar el búfer del Scanner
+			llamarConversorTemperaturas(in);
+		}
 	}
 	
 	/** Returns an ImageIcon, or null if the path was invalid. */
