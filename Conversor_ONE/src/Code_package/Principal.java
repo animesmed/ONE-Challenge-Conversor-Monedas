@@ -14,6 +14,10 @@ import javax.swing.JOptionPane;
  *
  */
 public class Principal{
+	/**
+	 * Metodo main por defecto
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		//===================================================================0
 		/*
@@ -37,7 +41,9 @@ public class Principal{
 		//Menu
 		Object valorEscogido = null;
 		do {
-			//--JOptionPane
+			/**
+			 * Menu inicial con las 2 unicas conversiones
+			 */
 			Object[] opcionesMenu = {"Conversor de Moneda", "Conversor de Temperatura"};
 			valorEscogido = JOptionPane.showInputDialog(null, 
 					"Seleccione el tipo de Conversion a realizar", "Menu", JOptionPane.INFORMATION_MESSAGE, 
@@ -57,7 +63,11 @@ public class Principal{
 				"Cerrando Programa","Exit",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+	/**
+	 * Metodo creado para poder preguntar al usuario si quiere volver a usar la conversión en
+	 * la que se encuentre.
+	 * @return boolean
+	 */
 	private static boolean MetodoAdicional() {
 		int respuesta = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
 	             "Seguir convirtiendo", "¿Desea convertir de nuevo?", 
@@ -68,18 +78,27 @@ public class Principal{
 			return false;
 		}
 	}
-	
+	/**
+	 * Metodo creado para poder leer un double por el usuario ingresado con punto o coma
+	 * @param num
+	 * @return Double
+	 */
 	private static double parseNumero(String num) {
 		if(num.contains(",")) {
 			num = num.replace(",",".");
 		}
 		return Double.parseDouble(num);
 	}
-	
+	/**
+	 * Metodo principal para el metodo de Convertir monedas, hace un llamado
+	 * al metodo Convertir() de la clase ConversorMonedas.java
+	 */
 	private static void llamarConversorMonedas()  {
+		/**
+		 * Try catch para poder atrapar cualquier error en la digitacion del
+		 * valor a convertir
+		 */
 		try {
-			//String numero = in.next();
-			//JOptionPane
 			String numero = JOptionPane.showInputDialog(JOptionPane.getRootFrame(),
 					"Ingrese el monto a transformar:","Dato a convertir",
 					JOptionPane.QUESTION_MESSAGE);
@@ -107,8 +126,15 @@ public class Principal{
 			llamarConversorMonedas();
 		}
 	}
-	
+	/**
+	 * Metodo principal para la conversión de temperaturas, hace un llamado al metodo 
+	 * principal Convertir() de la clase ConversorTemperaturas.java
+	 */
 	private static void llamarConversorTemperaturas() {
+		/**
+		 * Sentencia try-catch para poder atrapar el error de digitación de valor a 
+		 * convertir por el usuario
+		 */
 		try {
 			String numero = JOptionPane.showInputDialog("Ingrese los grados a transformar:");
 			if(numero==null) {

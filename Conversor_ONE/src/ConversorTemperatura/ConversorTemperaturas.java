@@ -1,8 +1,22 @@
 package ConversorTemperatura;
 import javax.swing.JOptionPane;
-
+/**
+ * Clase con metodos estaticos que contiene la propia transformación de las temperaturas
+ * con sus mensajes usando la JOptionPane.
+ * @author Annie
+ *
+ */
 public class ConversorTemperaturas{
+	/**
+	 * Variable usada para poder controlar cuando el usuario cancela el metodo
+	 * de convertir Temperatura y poder regresar al menu inicial
+	 */
 	public static boolean cancelado = false;
+	/**
+	 * Metodo principal que recibe el parametro
+	 * @param TemperaturaInicial
+	 * el cual es la temperatura inicial digitada por el usuario a convertir.
+	 */
 	public static void Convertir(double TemperaturaInicial) {
 		double nuevaTemperatura = 0.0;
 		cancelado = false;
@@ -129,9 +143,12 @@ public class ConversorTemperaturas{
 				"Resultado",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+	/**
+	 * Metodo donde muestra las posibles opciones de conversión, devuelve un
+	 * @return Object
+	 * que servira para el metodo Convertir() conteniendo la opcion elegida
+	 */
 	private static Object menu() {
-		
 		Object[] opcionesMenu = {"Convertir CELSIUS a FAHRENHEIT",
 				"Convertir CELSIUS a KELVIN",
 				"Convertir CELSIUS a REAUMUR",

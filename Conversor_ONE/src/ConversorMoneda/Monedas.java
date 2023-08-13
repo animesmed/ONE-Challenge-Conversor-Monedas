@@ -1,5 +1,10 @@
 package ConversorMoneda;
-
+/**
+ * Clase con los valores de conversión de 5 monedas principales a la moneda de Peru (sol):
+ * Dolares, Euros, Libras Esterlinas, Yenes, Wons
+ * @author Annie
+ *
+ */
 public class Monedas {
 	/*
 	- Convertir de la moneda de tu país a Dólar

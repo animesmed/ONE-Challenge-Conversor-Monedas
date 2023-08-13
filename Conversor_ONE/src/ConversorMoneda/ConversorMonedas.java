@@ -1,8 +1,22 @@
 package ConversorMoneda;
 import javax.swing.JOptionPane;
-
+/**
+ * Clase con metodos estaticos que contiene la propia transformación de las monedas
+ * con sus mensajes usando la JOptionPane.
+ * @author Annie
+ *
+ */
 public class ConversorMonedas {
+	/**
+	 * Variable usada para poder controlar cuando el usuario cancela el metodo
+	 * de convertir Monedas y poder regresar al menu inicial
+	 */
 	public static boolean cancelado = false;
+	/**
+	 * Metodo principal que recibe el parametro
+	 * @param MontoInicial
+	 * el cual es la cantidad de dinero digitada por el usuario a convertir.
+	 */
 	public static void Convertir(double MontoInicial) {
 		double factorAConvertir = 1;
 		cancelado = false;
@@ -59,11 +73,21 @@ public class ConversorMonedas {
 				"Tienes "+montoTransformado + " " + monedaNombre,"Resultado",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+	/**
+	 * Metodo que multiplica:
+	 * @param MontoInicial
+	 * @param multiplicador
+	 * Para devolver el resultado redondeado con 2 decimales:
+	 * @return Double
+	 */
 	private static double Convertir(double MontoInicial, double multiplicador) {
 		return Math.round((MontoInicial * multiplicador) * 100.0) / 100.0;
 	}
-	
+	/**
+	 * Metodo donde muestra las posibles opciones de conversión, devuelve un
+	 * @return Object
+	 * que servira para el metodo Convertir() conteniendo la opcion elegida
+	 */
 	private static Object menu() {
 		Object[] opcionesMenu = {"Convertir SOLES a DOLARES",
 				"Convertir SOLES a EUROS",

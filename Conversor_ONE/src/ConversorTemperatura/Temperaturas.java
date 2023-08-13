@@ -1,5 +1,10 @@
 package ConversorTemperatura;
-
+/**
+ * Clase con todos los metodos de conversión con las 5 principales temperaturas existentes:
+ * Celsius, Kelvin, Fahrenheit, Reumur, Rankine
+ * @author Annie
+ *
+ */
 public class Temperaturas {
 	//Celsius
 	public static double celsiusAKelvin(double x){
